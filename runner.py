@@ -13,6 +13,7 @@ import numpy as np
 import csv
 from matplotlib import pyplot as plt
 
+# initialize prototype values randomly in the range (min_p, max_p)
 def initPrototypes(k, num_dim, min_p, max_p):
     prototypes = []
     for i in range(k):
@@ -22,6 +23,9 @@ def initPrototypes(k, num_dim, min_p, max_p):
         prototypes.append(proto)
     return prototypes
 
+# returns finalized cluster mean values along with the clustered datapoints when given the initial data-set by X
+# k - number of clusters required
+# min_p/max_p - minimum/maximum value for initial prototype values
 def kmeans(X, k, min_p, max_p):
     num_dim = len(X[0])
     
@@ -69,10 +73,11 @@ def kmeans(X, k, min_p, max_p):
             prototypes[c_i] = new_val
     return prototypes, clusters
 
+# util functions
 def readDataBlobs():
     Y = []
     X = []
-    with open('blobs.csv') as file:
+    with open('data/blobs.csv') as file:
         reader = csv.reader(file)
         line_index = 0
         for row in reader:
@@ -86,7 +91,7 @@ def readDataBlobs():
 def readDataFlame():
     Y = []
     X = []
-    with open('flame.csv') as file:
+    with open('data/flame.csv') as file:
         reader = csv.reader(file)
         line_index = 0
         for row in reader:
@@ -97,6 +102,7 @@ def readDataFlame():
             line_index += 1
     return X, Y
 
+# plots visually the formation of clusters
 def plot(prototypes, clusters):
     if len(P[0]) != 2:
         return        
